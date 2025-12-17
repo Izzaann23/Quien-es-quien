@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+  <title>Quién es quién</title>
+  <link rel="icon" type="image/png" href="images/logo.png" />
+
+  <style>
+    @font-face {
+      font-family: "Heavitas";
+      src:
+        url("fonts/heavitas.woff2") format("woff2"),
+        url("fonts/heavitas.woff") format("woff");
+
+      font-display: swap;
+    }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: #ff2846;
+      font-family: "Heavitas", sans-serif;
+      color: #f2f2f2;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scale-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-origin: center;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(9, 160px);
+      grid-template-rows: repeat(4, 160px);
+      gap: 45px;
+    }
+
+    .grid-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .grid-item:hover {
+      transform: scale(1.05);
+    }
+
+    .grid-item img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      transition: filter 0.4s ease, transform 0.3s ease;
+      pointer-events: auto;
+    }
+
+    .grid-item.selected img {
+      filter: grayscale(100%) brightness(0.8);
+      transform: scale(0.95);
+    }
+
+    /* TEXTO */
+    .grid-item span {
+      position: relative;
+      font-size: 18px;
+      margin-top: 6px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    /* LÍNEA ROJA */
+    .grid-item span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 3px;
+      background: #ff0000;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.35s ease;
+    }
+
+    /* SELECCIONADO */
+    .grid-item.selected span {
+      color: #000;
+    }
+
+    .grid-item.selected span::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* 🔒 BLOQUEO DE SELECCIÓN Y DRAG */
+    .grid-item,
+    .grid-item img,
+    .grid-item span {
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="scale-wrapper" id="wrapper">
+    <div class="grid-container" id="grid"></div>
+  </div>
+
+  <script>
+    const items = [
+      "nene creative","stake","rxii","lethamyr",
+      "rosdri","dualview","robleis","amustycow",
+      "sunlesskhan","maktuf","jakze","pulse mk",
+      "aeroh","jzr","muiricles","pulse fire",
+      "evample","faith","m0nkey m00n","atomik",
+      "stizzy","crr","zen","leoro",
+      "torres8232","rw9","kileerrz","electrozz",
+      "team nixus","team vitality","pulse clan","karmine corp",
+      "redshyft","gen.g","nrg","leogaben"
+    ];
+
+    const grid = document.getElementById("grid");
+    const wrapper = document.getElementById("wrapper");
+
+    items.forEach(name => {
+      const div = document.createElement("div");
+      div.className = "grid-item";
+
+      const img = document.createElement("img");
+      img.src = "images/" + name + ".png";
+      img.alt = name;
+      img.draggable = false;
+      img.addEventListener("dragstart", e => e.preventDefault());
+
+      const span = document.createElement("span");
+      span.textContent = name;
+
+      div.appendChild(img);
+      div.appendChild(span);
+
+      div.addEventListener("click", () => {
+        div.classList.toggle("selected");
+      });
+
+      grid.appendChild(div);
+    });
+
+    function scaleBoard() {
+      const width = grid.offsetWidth;
+      const height = grid.offsetHeight;
+
+      const scale = Math.min(
+        (window.innerWidth * 0.95) / width,
+        (window.innerHeight * 0.95) / height
+      );
+
+      wrapper.style.transform = `scale(${scale})`;
+    }
+
+    window.addEventListener("resize", scaleBoard);
+    window.addEventListener("load", scaleBoard);
+  </script>
+</body>
+</html>
