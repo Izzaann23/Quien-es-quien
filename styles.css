@@ -2,7 +2,8 @@
   font-family: "Heavitas";
   src:
     url("fonts/Heavitas.woff2") format("woff2"),
-    url("fonts/Heavitas.woff") format("woff");
+    url("fonts/Heavitas.woff") format("woff"),
+    url("fonts/Heavitas.ttf") format("truetype");
   font-display: swap;
 }
 
@@ -26,6 +27,7 @@ html, body {
   align-items: center;
   justify-content: center;
   transform-origin: center;
+  will-change: transform;
 }
 
 .grid-container {
@@ -44,6 +46,7 @@ html, body {
   transition: transform 0.2s ease;
   user-select: none;
   -webkit-user-drag: none;
+  justify-content: flex-start;
 }
 
 .grid-item:hover {
@@ -52,6 +55,7 @@ html, body {
 
 .grid-item img {
   width: 100%;
+  max-width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: contain;
   transition: filter 0.4s ease, transform 0.3s ease;
@@ -75,6 +79,7 @@ html, body {
   margin-top: 6px;
   text-align: center;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .grid-item span::after {
@@ -114,6 +119,7 @@ html, body {
   transition:
     opacity 0.2s ease,
     transform 0.35s cubic-bezier(.2,1.6,.4,1);
+    will-change: transform, opacity;
 }
 
 .grid-item.selected::after {
