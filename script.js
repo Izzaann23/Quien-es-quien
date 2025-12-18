@@ -12,7 +12,7 @@ const items = [
 
 const grid = document.getElementById("grid");
 const wrapper = document.getElementById("wrapper");
-// ahora si no?
+
 items.forEach(name => {
   const item = document.createElement("div");
   item.className = "grid-item";
