@@ -19,7 +19,7 @@ items.forEach(name => {
   item.className = "grid-item";
 
   const img = document.createElement("img");
-  img.src = `images/${name}.png`;
+  img.src = `images/${name}.webp`;
   img.alt = name;
   img.draggable = false;
 
