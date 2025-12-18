@@ -36,6 +36,7 @@ html, body {
 }
 
 .grid-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,6 +57,7 @@ html, body {
   transition: filter 0.4s ease, transform 0.3s ease;
   pointer-events: auto;
   -webkit-user-drag: none;
+  z-index: -1;
 }
 
 .grid-item.selected img {
@@ -91,4 +93,41 @@ html, body {
 .grid-item.selected span::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+
+.grid-item::before,
+.grid-item::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90px;
+  height: 8px;
+  background: #ff0000;
+  border-radius: 6px;
+  box-shadow: 0 0 0 3px #fff;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition:
+    opacity 0.25s ease,
+    transform 0.35s cubic-bezier(.2,1.6,.4,1);
+  pointer-events: none;
+}
+
+.grid-item::before {
+  transform: translate(-50%, -50%) rotate(45deg) scale(0);
+}
+
+.grid-item::after {
+  transform: translate(-50%, -50%) rotate(-45deg) scale(0);
+}
+
+.grid-item.selected::before {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(45deg) scale(1);
+}
+
+.grid-item.selected::after {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(-45deg) scale(1);
 }
