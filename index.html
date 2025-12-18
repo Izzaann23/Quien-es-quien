@@ -4,13 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
   <title>Quién es quién</title>
-
   <link rel="icon" type="image/png" href="images/logo.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <div class="scale-wrapper" id="wrapper">
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader-panel top"></div>
+    <div class="loader-panel bottom"></div>
+  </div>
+
+  <div class="scale-wrapper" id="wrapper" aria-live="polite">
     <div class="grid-container" id="grid"></div>
   </div>
 
