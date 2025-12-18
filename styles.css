@@ -36,12 +36,10 @@ html, body {
   background: var(--bg); 
   display: grid;
   grid-template-rows: 50% 50%;
-  will-change: opacity, transform;
 }
 
 .loader-panel {
   background: var(--bg);
-  will-change: transform, opacity;
 }
 
 .loader-panel.top {
@@ -86,7 +84,6 @@ html, body {
   align-items: center;
   justify-content: center;
   transform-origin: center;
-  will-change: transform;
 }
 
 .grid-container {
@@ -179,7 +176,6 @@ html, body {
   transition:
     opacity 0.2s ease,
     transform 0.35s cubic-bezier(.2, 1.6, .4, 1);
-  will-change: transform, opacity;
 }
 
 .grid-item.selected::after {
