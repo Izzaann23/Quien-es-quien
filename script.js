@@ -1,13 +1,13 @@
 const items = [
-  "nene creative","stake","rxii","lethamyr",
-  "rosdri","dualview","robleis","amustycow",
-  "sunlesskhan","maktuf","jakze","pulse mk",
-  "aeroh","jzr","muiricles","pulse fire",
-  "evample","faith","m0nkey m00n","atomik",
-  "stizzy","crr","zen","leoro",
-  "torres8232","rw9","kileerrz","electrozz",
-  "team nixus","team vitality","pulse clan","karmine corp",
-  "redshyft","gen.g","nrg","leogaben"
+  "nene creative", "stake", "rxii", "lethamyr",
+  "rosdri", "dualview", "robleis", "amustycow",
+  "sunlesskhan", "maktuf", "jakze", "pulse mk",
+  "aeroh", "jzr", "muiricles", "pulse fire",
+  "evample", "faith", "m0nkey m00n", "atomik",
+  "stizzy", "crr", "zen", "leoro",
+  "torres8232", "rw9", "kileerrz", "electrozz",
+  "team nixus", "team vitality", "pulse clan", "karmine corp",
+  "redshyft", "gen.g", "nrg", "leogaben"
 ];
 
 const grid = document.getElementById("grid");

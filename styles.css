@@ -103,7 +103,6 @@ html, body {
   cursor: pointer;
   transition: transform 0.2s ease;
   user-select: none;
-  -webkit-user-drag: none;
   transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
 }
 
@@ -131,7 +130,6 @@ html, body {
   object-fit: contain;
   transition: filter 0.4s ease, transform 0.3s ease;
   pointer-events: auto;
-  -webkit-user-drag: none;
   position: relative;
   z-index: 1;
   outline: none;
