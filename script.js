@@ -1,4 +1,5 @@
-const items = [
+const Items = [
+
   "nene creative", "stake", "rxii", "lethamyr",
   "rosdri", "dualview", "robleis", "amustycow",
   "sunlesskhan", "maktuf", "jakze", "pulse mk",
@@ -8,13 +9,16 @@ const items = [
   "torres8232", "rw9", "kileerrz", "electrozz",
   "team nixus", "team vitality", "pulse clan", "karmine corp",
   "redshyft", "gen.g", "nrg", "leogaben"
+
 ];
 
-const grid = document.getElementById("grid");
-const wrapper = document.getElementById("wrapper");
-const loader = document.getElementById("loader");
+const Grid = document.getElementById("grid");
+const Wrapper = document.getElementById("wrapper");
+const Loader = document.getElementById("loader");
 
-items.forEach(name => {
+// Create all images
+Items.forEach(name => {
+
   const item = document.createElement("div");
   item.className = "grid-item";
 
@@ -28,44 +32,69 @@ items.forEach(name => {
   span.title = name; 
 
   item.addEventListener("click", () => {
+
     item.classList.toggle("selected");
 
-    if (hiddenMode) {
+    if (HiddenMode) {
+
       if (item.classList.contains("selected")) {
+
         item.classList.add("hidden");
+
       } else {
+
         item.classList.remove("hidden");
-      }
-    }
+
+      };
+
+    };
+
   });
   
   item.append(img, span);
-  grid.appendChild(item);
+  Grid.appendChild(item);
+
 });
 
+// Scales all the board.
 function scaleBoard() {
-  const scale = Math.min(
-    (window.innerWidth * 0.95) / grid.offsetWidth,
-    (window.innerHeight * 0.95) / grid.offsetHeight
-  );
-  wrapper.style.transform = `scale(${scale})`;
-}
+
+  const width = (window.innerWidth * 0.95) / Grid.offsetWidth;
+  const height = (window.innerHeight * 0.95) / Grid.offsetHeight;
+
+  const scale = Math.min(width, height);
+
+  Wrapper.style.transform = `scale(${scale})`;
+
+};
 
 window.addEventListener("resize", scaleBoard);
 
+// Waits for all images to be loaded.
 function whenImagesReady() {
-  const imgs = Array.from(grid.querySelectorAll("img"));
+
+  const imgs = Array.from(Grid.querySelectorAll("img"));
+
   const promises = imgs.map(img => {
+
     if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+
     return new Promise(resolve => {
+
       img.addEventListener("load", resolve, { once: true });
       img.addEventListener("error", resolve, { once: true });
-    });
-  });
-  return Promise.all(promises);
-}
 
+    });
+
+  });
+
+  return Promise.all(promises);
+
+};
+
+// Inits the application.
 async function init() {
+
   const fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
 
   const imagesReady = whenImagesReady();
@@ -74,29 +103,40 @@ async function init() {
 
   scaleBoard();
 
-  loader.classList.add("ready");
+  Loader.classList.add("ready");
 
-  loader.addEventListener("animationend", (e) => {
+  Loader.addEventListener("animationend", (e) => {
+
     if (e.animationName === "loaderFade") {
-      loader.remove();
+
+      Loader.remove();
+
     }
+
   }, { once: true });
-}
+
+};
 
 window.addEventListener("load", init);
 
 // Hidden mode
-let hiddenMode = false;
+let HiddenMode = false;
 
-document.addEventListener("keydown", (e) => {
-  if (e.key.toLowerCase() === "h") {
-    hiddenMode = !hiddenMode;
+document.addEventListener("keydown", (input) => {
+
+  if (input.key.toLowerCase() === "h") {
+
+    HiddenMode = !HiddenMode;
 
     const selectedItems = document.querySelectorAll(".grid-item.selected");
 
     selectedItems.forEach(item => {
-      if (hiddenMode) item.classList.add("hidden");
+
+      if (HiddenMode) item.classList.add("hidden");
       else item.classList.remove("hidden");
+
     });
-  }
+
+  };
+  
 });
