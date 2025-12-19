@@ -27,8 +27,19 @@ items.forEach(name => {
   span.textContent = name;
   span.title = name; 
 
+  item.addEventListener("click", () => {
+    item.classList.toggle("selected");
+
+    if (hiddenMode) {
+      if (item.classList.contains("selected")) {
+        item.classList.add("hidden");
+      } else {
+        item.classList.remove("hidden");
+      }
+    }
+  });
+  
   item.append(img, span);
-  item.addEventListener("click", () => item.classList.toggle("selected"));
   grid.appendChild(item);
 });
 
@@ -73,3 +84,19 @@ async function init() {
 }
 
 window.addEventListener("load", init);
+
+// Hidden mode
+let hiddenMode = false;
+
+document.addEventListener("keydown", (e) => {
+  if (e.key.toLowerCase() === "h") {
+    hiddenMode = !hiddenMode;
+
+    const selectedItems = document.querySelectorAll(".grid-item.selected");
+
+    selectedItems.forEach(item => {
+      if (hiddenMode) item.classList.add("hidden");
+      else item.classList.remove("hidden");
+    });
+  }
+});

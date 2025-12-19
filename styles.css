@@ -90,6 +90,7 @@ html, body {
   display: grid;
   grid-template-columns: repeat(9, 160px);
   grid-template-rows: repeat(4, 160px);
+  grid-auto-flow: dense;
   gap: 45px;
 }
 
@@ -103,6 +104,20 @@ html, body {
   transition: transform 0.2s ease;
   user-select: none;
   -webkit-user-drag: none;
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+}
+
+.grid-item:not(.hidden) {
+  opacity: 1;
+  transform: scale(1);
+  position: static; 
+}
+
+.grid-item.hidden {
+  opacity: 0;
+  transform: scale(0.6);
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .grid-item:hover {
@@ -181,4 +196,12 @@ html, body {
 .grid-item.selected::after {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
+}
+
+@media (max-width: 1000px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 160px);
+    grid-template-rows: repeat(9, 160px);
+    gap: 50px;
+  }
 }
