@@ -29,23 +29,17 @@ Items.forEach(name => {
 
   const span = document.createElement("span");
   span.textContent = name;
-  span.title = name; 
+  span.title = name.toUpperCase(); 
 
   item.addEventListener("click", () => {
 
     item.classList.toggle("selected");
 
     if (HiddenMode) {
+      
+      const action = item.classList.contains("selected") ? "add" : "remove";
 
-      if (item.classList.contains("selected")) {
-
-        item.classList.add("hidden");
-
-      } else {
-
-        item.classList.remove("hidden");
-
-      };
+      item.classList[action]("hidden");
 
     };
 
@@ -55,6 +49,8 @@ Items.forEach(name => {
   Grid.appendChild(item);
 
 });
+
+///// FUNCS \\\\\
 
 // Scales all the board.
 function scaleBoard() {
@@ -67,8 +63,6 @@ function scaleBoard() {
   Wrapper.style.transform = `scale(${scale})`;
 
 };
-
-window.addEventListener("resize", scaleBoard);
 
 // Waits for all images to be loaded.
 function whenImagesReady() {
@@ -105,26 +99,23 @@ async function init() {
 
   Loader.classList.add("ready");
 
-  Loader.addEventListener("animationend", (e) => {
+  Loader.addEventListener("animationend", (event) => {
 
-    if (e.animationName === "loaderFade") {
-
-      Loader.remove();
-
-    }
+    if (event.animationName === "loaderFade") Loader.remove();
 
   }, { once: true });
 
 };
 
+window.addEventListener("resize", scaleBoard);
 window.addEventListener("load", init);
 
 // Hidden mode
 let HiddenMode = false;
 
-document.addEventListener("keydown", (input) => {
+document.addEventListener("keydown", (event) => {
 
-  if (input.key.toLowerCase() === "h") {
+  if (event.key.toLowerCase() === "h") {
 
     HiddenMode = !HiddenMode;
 
