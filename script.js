@@ -130,10 +130,11 @@ document.addEventListener("keydown", (input) => {
 
     const selectedItems = document.querySelectorAll(".grid-item.selected");
 
+    const callback = HiddenMode ? "add" : "remove";
+
     selectedItems.forEach(item => {
 
-      if (HiddenMode) item.classList.add("hidden");
-      else item.classList.remove("hidden");
+      item.classList[callback]("hidden");
 
     });
 
